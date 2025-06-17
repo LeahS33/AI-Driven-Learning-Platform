@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import { json } from 'body-parser';
 // import { routes } from './routes';
 // import { config } from './config';
-import { connectDB } from './models/DB-conection';
+import { connectDB } from './config/DB-conection';
 
 dotenv.config();
 
