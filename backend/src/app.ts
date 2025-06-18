@@ -3,10 +3,11 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { json } from 'body-parser';
 // import { routes } from './routes';
-// import { config } from './config';
+//import { config } from './config';
 import { connectDB } from './config/DB-conection';
+import userRoutes from './user/user.routes';
 
-dotenv.config();
+dotenv.config({ path: require('path').resolve(__dirname, '../.env') });
 
 connectDB();
 
@@ -21,8 +22,8 @@ app.get('/', (req, res) => {
   res.send('API is running');
 });
 
-// API routes
-// app.use('/api', routes);
+//API routes
+app.use('/api/users', userRoutes);
 
 // // Error handling middleware
 // app.use((err, req, res, next) => {
