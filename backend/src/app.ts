@@ -5,7 +5,7 @@ import { json } from 'body-parser';
 // import { routes } from './routes';
 //import { config } from './config';
 import { connectDB } from './config/DB-conection';
-import userRoutes from './user/user.routes';
+import userRoutes from './routes/user.routes';
 
 dotenv.config({ path: require('path').resolve(__dirname, '../.env') });
 
