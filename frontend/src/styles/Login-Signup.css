@@ -1,0 +1,89 @@
+/* Login and Signup Page Styles */
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+}
+
+.auth-form-box {
+  background: #fff;
+  padding: 2.5rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(60, 60, 120, 0.15);
+  width: 100%;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.auth-form-box h2 {
+  text-align: center;
+  color: #2d3a4b;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.auth-form-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.auth-form-box input {
+  padding: 0.75rem 1rem;
+  border: 1px solid #e0e6ed;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #f7fafd;
+  transition: border 0.2s;
+}
+
+.auth-form-box input:focus {
+  border-color: #66a6ff;
+  outline: none;
+  background: #fff;
+}
+
+.auth-form-box button {
+  padding: 0.75rem 1rem;
+  background: linear-gradient(90deg, #66a6ff 0%, #89f7fe 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 0.5rem;
+}
+
+.auth-form-box button:hover {
+  background: linear-gradient(90deg, #89f7fe 0%, #66a6ff 100%);
+}
+
+.auth-form-box a {
+  color: #66a6ff;
+  text-decoration: none;
+  font-size: 0.95rem;
+  text-align: center;
+  margin-top: 0.5rem;
+  transition: color 0.2s;
+}
+
+.auth-form-box a:hover {
+  color: #2d3a4b;
+}
+
+.auth-form-box .error {
+  color: #e74c3c;
+  background: #fff0f0;
+  border: 1px solid #ffd6d6;
+  border-radius: 6px;
+  padding: 0.5rem;
+  text-align: center;
+  font-size: 0.97rem;
+}
