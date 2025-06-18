@@ -1,9 +1,12 @@
-// import { Router } from 'express';
-// import { getUser, createUser } from '../controllers';
+import { Router } from 'express';
+import userRoutes from './user.routes';
+import categoryRoutes from './category.routes';
+import subCategoryRoutes from './sub-category.routes';  
 
-// const router = Router();
+const router = Router();
 
-// router.get('/users/:id', getUser);
-// router.post('/users', createUser);
+router.use('/users', userRoutes);
+router.use('/categories', categoryRoutes);
+router.use('/sub-categories', subCategoryRoutes);
 
-// export default router;
+export default router;
