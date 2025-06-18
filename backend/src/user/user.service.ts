@@ -1,6 +1,14 @@
 import { UserModel, IUser } from './user.model';
 
+const isValidPhone = (phone: string) => {
+    //Israeli phone number (10 digits, starts with 05)
+    return /^05\d{8}$/.test(phone);
+};
+
 export const createUser = async (userData: Partial<IUser>) => {
+    if (!userData.phone || !isValidPhone(userData.phone)) {
+        throw new Error('Invalid phone number');
+    }
     const existingUser = await UserModel.exists({ phone: userData.phone });
     if (existingUser) {
         throw new Error('User with this phone already exists');
@@ -18,8 +26,6 @@ export const getUserById = async (id: string) => {
 
 export const getAllUsers = async () => {
     const users = await UserModel.find();
-    // Optionally, you can throw an error if no users exist:
-    // if (users.length === 0) throw new Error('No users found');
     return users;
 };
 
@@ -38,3 +44,4 @@ export const deleteUser = async (id: string) => {
     }
     return user;
 };
+
