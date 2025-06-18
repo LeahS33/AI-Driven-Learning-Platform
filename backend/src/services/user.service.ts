@@ -1,47 +1,38 @@
 import { UserModel, IUser } from '../models/user.model';
+import { BaseService } from './generic-base-service';
 
-const isValidPhone = (phone: string) => {
-    //Israeli phone number (10 digits, starts with 05)
-    return /^05\d{8}$/.test(phone);
-};
+class UserService extends BaseService<IUser> {
 
-export const createUser = async (userData: Partial<IUser>) => {
-    if (!userData.phone || !isValidPhone(userData.phone)) {
-        throw new Error('Invalid phone number');
-    }
-    const existingUser = await UserModel.exists({ phone: userData.phone });
-    if (existingUser) {
-        throw new Error('User with this phone already exists');
-    }
-    return UserModel.create(userData);
-};
+    private isValidPhone = (phone: string) => {
+        //Israeli phone number (10 digits, starts with 05) 
+        return /^05\d{8}$/.test(phone);
+    };
 
-export const getUserById = async (id: string) => {
-    const user = await UserModel.findById(id);
-    if (!user) {
-        throw new Error('User not found');
-    }
-    return user;
-};
+    async createUser(userData: Partial<IUser>) {
+        if (!userData.phone || !this.isValidPhone(userData.phone)) {
+            throw new Error('Invalid phone number');
+        }
+        const existingUser = await this.model.exists({ phone: userData.phone });
+        if (existingUser) {
+            throw new Error('User with this phone already exists');
+        }
+        return super.create(userData);
+    };
 
-export const getAllUsers = async () => {
-    const users = await UserModel.find();
-    return users;
-};
+    async loginUser(phone: string, name: string) {
+        const user = await this.model.findOne({ phone });
+        if (!user) {
+            throw new Error('User not found');
+        }
+        if(user.name!== name) { 
+            throw new Error('Invalid credentials');
+        }
+        return user;
+    };
 
-export const updateUser = async (id: string, update: Partial<IUser>) => {
-    const user = await UserModel.findByIdAndUpdate(id, update, { new: true });
-    if (!user) {
-        throw new Error('User not found');
-    }
-    return user;
-};
+}
+export const userService = new UserService(UserModel);
 
-export const deleteUser = async (id: string) => {
-    const user = await UserModel.findByIdAndDelete(id);
-    if (!user) {
-        throw new Error('User not found');
-    }
-    return user;
-};
+
+
 
