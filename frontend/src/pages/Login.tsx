@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useAppDispatch } from '../store/hooks';
 import { loginUser } from '../store/userSlice';
 import { Link } from 'react-router-dom';
+import '../styles/Login-Signup.css'
 
 
 const Login = () => {
@@ -25,7 +26,8 @@ const Login = () => {
     };
 
     return (
-        <div>
+        <div className="auth-container">
+        <div className="auth-form-box">
             <h2>Login</h2>
             <form onSubmit={handleSubmit}>
                 <input
@@ -40,11 +42,13 @@ const Login = () => {
                 />
                 <button type="submit">Login</button>
                 <Link to="/" style={{ marginLeft: '10px' }}>to signup</Link>
-                {error && <div style={{ color: 'red' }}>{error}</div>}
+                {error && <div className="error" >{error}</div>}
             </form>
+        </div>
         </div>
     )
 }
 export default Login;
 
 
+//style={{ color: 'red' }}
