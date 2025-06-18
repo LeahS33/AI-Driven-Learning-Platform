@@ -6,6 +6,7 @@ import { json } from 'body-parser';
 //import { config } from './config';
 import { connectDB } from './config/DB-conection';
 import userRoutes from './routes/user.routes';
+import categoryRoutes from './routes/category.routes';
 
 dotenv.config({ path: require('path').resolve(__dirname, '../.env') });
 
@@ -24,6 +25,7 @@ app.get('/', (req, res) => {
 
 //API routes
 app.use('/api/users', userRoutes);
+app.use('/api/categories', categoryRoutes);
 
 // // Error handling middleware
 // app.use((err, req, res, next) => {
