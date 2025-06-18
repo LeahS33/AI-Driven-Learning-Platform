@@ -1,4 +1,4 @@
-import { UserModel, IUser } from './user.model';
+import { UserModel, IUser } from '../models/user.model';
 
 const isValidPhone = (phone: string) => {
     //Israeli phone number (10 digits, starts with 05)
