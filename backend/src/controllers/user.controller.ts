@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import * as userService from '../services/user.service';
+import { userService } from '../services/user.service';
 
 export const createUser = async (req: Request, res: Response) => {
   try {
@@ -10,36 +10,28 @@ export const createUser = async (req: Request, res: Response) => {
   }
 };
 
-export const getUserById = async (req: Request, res: Response) => {
+export const loginUser = async (req: Request, res: Response) => {
   try {
-    const user = await userService.getUserById(req.params.id);
+    const { phone, name } = req.body;
+    const user = await userService.loginUser(phone, name);
     res.json(user);
   } catch (error: any) {
-    res.status(404).json({ error: error.message });
+    res.status(401).json({ error: error.message });
   }
 };
 
 export const getAllUsers = async (_req: Request, res: Response) => {
   try {
-    const users = await userService.getAllUsers();
+    const users = await userService.getAll();
     res.json(users);
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }
 };
 
-export const updateUser = async (req: Request, res: Response) => {
-  try {
-    const user = await userService.updateUser(req.params.id, req.body);
-    res.json(user);
-  } catch (error: any) {
-    res.status(404).json({ error: error.message });
-  }
-};
-
 export const deleteUser = async (req: Request, res: Response) => {
   try {
-    await userService.deleteUser(req.params.id);
+    await userService.delete(req.params.id);
     res.status(204).send();
   } catch (error: any) {
     res.status(404).json({ error: error.message });
