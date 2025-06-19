@@ -1,10 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { login, signup } from "../api/userApi";
+import type { UserState } from '../types';
+
+const savedUser = localStorage.getItem('user');
 
 export const loginUser = createAsyncThunk(
     "user/login",
     async ({ name, phone }: { name: string; phone: string }) => {
         const user = await login(name, phone);
+        localStorage.setItem('user', JSON.stringify(user));
         return user;
     }
 );
@@ -12,19 +16,13 @@ export const loginUser = createAsyncThunk(
 export const SignupUser = createAsyncThunk(
     "user/",
     async ({ name, phone }: { name: string; phone: string }) => {
-        const user = await signup({name, phone});
+        const user = await signup({ name, phone });
         return user;
     }
 );
 
-type UserState = {
-    user: { name: string, Phone: string } |null; 
-    status: string;
-    error: string | null;
-};
-
-const initialState: UserState = { 
-    user: null,
+const initialState: UserState = {
+    user: savedUser ? JSON.parse(savedUser) : null,
     status: "idle",
     error: null
 };
