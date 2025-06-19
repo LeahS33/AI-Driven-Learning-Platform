@@ -24,11 +24,21 @@ class UserService extends BaseService<IUser> {
         if (!user) {
             throw new Error('User not found');
         }
-        if(user.name!== name) { 
+        if (user.name !== name) {
             throw new Error('Invalid credentials');
         }
         return user;
     };
+
+    async giveAdminAccess(userId: string) {
+        const user = await this.model.findByIdAndUpdate(
+            userId,
+            { isAdmin: true },
+            { new: true }
+        );
+        if (!user) throw new Error('User not found');
+        return user;
+    }
 
 }
 export const userService = new UserService(UserModel);

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { userService } from '../services/user.service';
-
+// import mongoose from 'mongoose';
 export const createUser = async (req: Request, res: Response) => {
   try {
     const user = await userService.createUser(req.body);
@@ -35,5 +35,14 @@ export const deleteUser = async (req: Request, res: Response) => {
     res.status(204).send();
   } catch (error: any) {
     res.status(404).json({ error: error.message });
+  }
+};
+
+export const giveAdminAccess = async (req: Request, res: Response) => {
+  try {
+    const user = await userService.giveAdminAccess(req.params.userId);
+    res.json(user);
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
   }
 };

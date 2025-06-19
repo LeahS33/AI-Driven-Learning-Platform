@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAppDispatch } from '../store/hooks';
+import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../store/userSlice';
 import { Link } from 'react-router-dom';
 import '../styles/Login-Signup.css'
@@ -11,6 +12,7 @@ const Login = () => {
     const [name, setName] = useState('');
     const [error, setError] = useState('');
 
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -18,33 +20,33 @@ const Login = () => {
         setError('');
         try {
             await dispatch(loginUser({ phone, name })).unwrap();
-            alert('Login successful!');
+            navigate('/dashboard');
+            //alert('Login successful!');
         } catch (err: any) {
             setError(err.message);
-            // alert(`Login failed: ${err.message}`);
         }
     };
 
     return (
         <div className="auth-container">
-        <div className="auth-form-box">
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
-                <input
-                    value={name}
-                    onChange={e => setName(e.target.value)}
-                    placeholder="Name"
-                />
-                <input
-                    value={phone}
-                    onChange={e => setPhone(e.target.value)}
-                    placeholder="Phone"
-                />
-                <button type="submit">Login</button>
-                <Link to="/" style={{ marginLeft: '10px' }}>to signup</Link>
-                {error && <div className="error" >{error}</div>}
-            </form>
-        </div>
+            <div className="auth-form-box">
+                <h2>Login</h2>
+                <form onSubmit={handleSubmit}>
+                    <input
+                        value={name}
+                        onChange={e => setName(e.target.value)}
+                        placeholder="Name"
+                    />
+                    <input
+                        value={phone}
+                        onChange={e => setPhone(e.target.value)}
+                        placeholder="Phone"
+                    />
+                    <button type="submit">Login</button>
+                    <Link to="/">to signup</Link>
+                    {error && <div className="error" >{error}</div>}
+                </form>
+            </div>
         </div>
     )
 }
