@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import type { AdminState, IUser } from '../types';
-import { deleteUser  as deleteUserApi, giveAdminAccess as giveAdminAccessApi ,getAllUsers } from '../api/UserApi';
+import { deleteUser  as deleteUserApi, giveAdminAccess as giveAdminAccessApi ,getAllUsers } from '../api/userApi';
 
 export const fetchUsers = createAsyncThunk(
     'admin/fetchUsers',
