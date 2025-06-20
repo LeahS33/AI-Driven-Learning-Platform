@@ -30,7 +30,7 @@ export const getAllUsers = async () => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      'user-id': currentUser._id // Add user ID for authentication
+      'user-id': currentUser._id 
     },
     credentials: 'include'
   });

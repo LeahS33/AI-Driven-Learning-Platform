@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAppDispatch } from '../store/hooks';
 import { useNavigate } from 'react-router-dom';
-import { loginUser } from '../store/userSlice';
+import { loginUser } from '../store/thunks/userThunk';
 import { Link } from 'react-router-dom';
 import '../styles/Login-Signup.css'
 

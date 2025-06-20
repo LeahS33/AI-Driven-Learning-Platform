@@ -1,25 +1,9 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { login, signup } from "../api/userApi";
+import { createSlice } from "@reduxjs/toolkit";
 import type { UserState } from '../types';
+import { loginUser, SignupUser } from "./thunks/userThunk";
+
 
 const savedUser = localStorage.getItem('user');
-
-export const loginUser = createAsyncThunk(
-    "user/login",
-    async ({ name, phone }: { name: string; phone: string }) => {
-        const user = await login(name, phone);
-        localStorage.setItem('user', JSON.stringify(user));
-        return user;
-    }
-);
-
-export const SignupUser = createAsyncThunk(
-    "user/",
-    async ({ name, phone }: { name: string; phone: string }) => {
-        const user = await signup({ name, phone });
-        return user;
-    }
-);
 
 const initialState: UserState = {
     user: savedUser ? JSON.parse(savedUser) : null,
@@ -37,14 +21,29 @@ const userSlice = createSlice({
         builder
             .addCase(loginUser.pending, (state) => {
                 state.status = "loading";
+                state.error = null;
             })
             .addCase(loginUser.fulfilled, (state, action) => {
                 state.status = "succeeded";
                 state.user = action.payload;
+                state.user = action.payload;
             })
             .addCase(loginUser.rejected, (state, action) => {
                 state.status = "failed";
-                state.error = action.error.message || null;
+                state.error = typeof action.payload === 'string' ? action.payload : 'Failed to create prompt';
+            })
+            .addCase(SignupUser.pending, (state) => {
+                state.status = "loading";
+                state.error = null;
+            })
+            .addCase(SignupUser.fulfilled, (state, action) => {
+                state.status = "succeeded";
+                state.user = action.payload;
+                state.error = null;
+            })
+            .addCase(SignupUser.rejected, (state, action) => {
+                state.status = "failed";
+                state.error = typeof action.payload === 'string' ? action.payload : 'Failed to create prompt';
             });
     },
 });

@@ -38,7 +38,7 @@ export const deletePrompt = async (req: Request, res: Response) => {
     }
 };
 
-export const getAllPromptByUsueId = async (req: Request, res: Response) => {
+export const getAllPromptByUserId = async (req: Request, res: Response) => {
     try {
         const userId = req.params.userId;
         const prompts = await promptService.getPromptsByUserId(userId);
@@ -52,5 +52,19 @@ export const getAllPromptByUsueId = async (req: Request, res: Response) => {
             success: false,
             error: error.message || 'Failed to fetch prompts for user'
         });
+    }
+};
+
+export const getPromptById = async (req: Request, res: Response) => {
+    try {
+        const promptId = req.params.id;
+        const prompt = await promptService.getById(promptId, ['category_id', 'sub_category_id'])
+        if (!prompt) {
+            res.status(404).json({ success: false, error: 'Prompt not found' });
+        }
+        res.status(200).json({ success: true, data: prompt });
+    } catch (error: any) {
+        console.error('Error fetching prompt by ID:', error);
+        res.status(500).json({ success: false, error: error.message || 'Failed to fetch prompt' });
     }
 };

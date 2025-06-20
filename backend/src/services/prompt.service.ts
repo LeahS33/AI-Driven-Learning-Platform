@@ -29,7 +29,7 @@ class PromptService extends BaseService<IPrompt> {
         }
     }
 
-    async getPromptsByUserId(userId: string): Promise<IPrompt[]> {
+    async getPromptsByUserId(userId: string,): Promise<IPrompt[]> {
         try {
             const prompts = await this.model.find({ user_id: userId })
 
@@ -42,7 +42,23 @@ class PromptService extends BaseService<IPrompt> {
             throw error;
         }
     }
-}
 
+async getById(id: string, populateFields?: string[]) {
+        try {
+            let query = this.model.findById(id);
+            if (populateFields && populateFields.length > 0) {
+                populateFields.forEach(field => {
+                    query = query.populate(field);
+                });
+            }
+            const prompt = await query;
+            if (!prompt) throw new Error('Prompt not found');
+            return prompt;
+        } catch (error: any) {
+            throw new Error(`Error fetching prompt: ${error.message}`);
+        }
+    }
+
+}
 
 export const promptService = new PromptService(PromptModel);
