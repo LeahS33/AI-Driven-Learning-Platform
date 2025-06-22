@@ -19,8 +19,19 @@ export interface IPrompt {
     created_at: Date;
 }
 
+export interface ICategory{
+    _id: string,
+    name: string;
+}
+
+export interface ISubCategory{
+    _id: string,
+    name: string;
+    category_id: string;
+}
+
 export interface UserState {
-    user: { name: string, phone: string } | null;
+    user: IUser | null;
     status: string;
     error: string | null;
 }
@@ -34,6 +45,16 @@ export interface AdminState {
 export interface PromptState {
     allPrompts: IPrompt[];
     currentUserPrompts: IPrompt[];
+    status: 'idle' | 'loading' | 'succeeded' | 'failed';
+    error: string | null;
+}
+
+
+export interface CategoryState {
+    categories: ICategory[];
+    currentSubCategories: ISubCategory[];
+    currentCategory: string | null;
+    currentSubCategory: string | null;
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
 }

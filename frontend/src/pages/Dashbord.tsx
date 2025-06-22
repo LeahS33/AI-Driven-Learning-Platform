@@ -24,12 +24,18 @@ const Dashboard = () => {
 
     return (
         <div className="dashboard-container">
-            <div>
+            <nav className="dashboard-navbar">
+                <a href="#user-section" className="dashboard-link">User Dashboard</a>
+                {isAdmin && (
+                    <a href="#admin-section" className="dashboard-link">Admin Dashboard</a>
+                )}
+            </nav>
+
+            <div id="user-section">
                 <UserDashboard />
             </div>
-
             {isAdmin && (
-                <div className="admin-section">
+                <div id="admin-section" className="admin-section">
                     <AdminDashboard />
                 </div>
             )}
@@ -37,7 +43,9 @@ const Dashboard = () => {
                 <Link className="logout-link" to="/login">
                     Logout
                 </Link>
+
             </div>
+
         </div>
     );
 };

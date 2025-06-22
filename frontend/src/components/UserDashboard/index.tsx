@@ -1,6 +1,8 @@
 import { useAppSelector } from '../../store/hooks';
 import type { IUser } from '../../types';
 import PromptHistory from '../PromptHistory';
+import CategorySelector from './CategorySelector';
+import PromptInput from './PromptInput';
 
 
 const UserDashboard = () => {
@@ -14,7 +16,8 @@ const UserDashboard = () => {
                 </div>
                 <div className="promopt-input-section">
                     <h2 className="section-title">Prompt Input</h2>
-                    {/* User's prompt input */}
+                    <CategorySelector />
+                    <PromptInput />
                 </div>
                 <div className="history-section">
                     <PromptHistory />
