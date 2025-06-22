@@ -1,3 +1,4 @@
+
 # AI-Driven Learning Platform – Frontend
 
 This is the frontend for the AI-Driven Learning Platform. It is built with **React**, **TypeScript**, **Redux Toolkit**, and **Vite**.  
@@ -52,7 +53,6 @@ frontend/
 
 - The backend API is available at `http://localhost:3000` (or as set in your `.env`).
 - The backend is already running and accessible.
-- Environment variables are required for configuration (see `.env.example`).
 
 ---
 
@@ -84,18 +84,17 @@ frontend/
 
 ---
 
-## 🧪 Sample `.env.example` File
-
-```
-VITE_API_URL=http://localhost:3000
-```
-
----
-
 ## 🖼️ Screenshots
 
-
-
+![users](https://github.com/user-attachments/assets/fa8ba582-bcb6-4f99-a0d5-61a49bd192a2)
+---
+![admin learning history](https://github.com/user-attachments/assets/c3ca2e22-26dd-4f3b-a4ad-c0735e88d3fd)
+---
+![user learning history](https://github.com/user-attachments/assets/f8941903-62e9-478b-9b30-fa67bbc39318)
+---
+![prompt input](https://github.com/user-attachments/assets/456433ad-a7eb-45cd-9e63-b4b668e6d422)
+---
+![login](https://github.com/user-attachments/assets/252c9dd6-2d7a-4220-87ff-971ed801461b)
 ---
 
 ## 🤝 Contributing
