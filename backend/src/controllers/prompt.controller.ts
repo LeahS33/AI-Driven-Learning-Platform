@@ -1,3 +1,4 @@
+import { Console } from "console";
 import { promptService } from "../services/prompt.service";
 import { Request, Response } from 'express';
 
@@ -42,9 +43,21 @@ export const getAllPromptByUserId = async (req: Request, res: Response) => {
     try {
         const userId = req.params.userId;
         const prompts = await promptService.getPromptsByUserId(userId);
+         const transformedPrompts = prompts.map(prompt => {
+            const promptObj = prompt.toObject();
+            return {
+                _id: promptObj._id,
+                prompt: promptObj.prompt,
+                response: promptObj.response,
+                created_at: promptObj.created_at,
+                user_id: promptObj.user_id,
+                category_name: promptObj.category_id?.name || 'N/A',
+                sub_category_name: promptObj.sub_category_id?.name || 'N/A'
+            };
+        });
         res.status(200).json({
             success: true,
-            data: prompts
+            data: transformedPrompts
         });
     } catch (error: any) {
         console.error('Error fetching prompts by user ID:', error);
@@ -62,7 +75,12 @@ export const getPromptById = async (req: Request, res: Response) => {
         if (!prompt) {
             res.status(404).json({ success: false, error: 'Prompt not found' });
         }
-        res.status(200).json({ success: true, data: prompt });
+        const populatedPrompt = {
+            ...prompt.toObject(),
+            category_id: (prompt.category_id as any).name,
+            sub_category_id: (prompt.sub_category_id as any).name
+        };
+        res.status(200).json({ success: true, data: populatedPrompt });
     } catch (error: any) {
         console.error('Error fetching prompt by ID:', error);
         res.status(500).json({ success: false, error: error.message || 'Failed to fetch prompt' });

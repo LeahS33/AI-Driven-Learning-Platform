@@ -12,18 +12,12 @@ const UserDashboard = () => {
                 <div className="welcome-section">
                     <h1>Welcome {user?.name}!</h1>
                 </div>
-                <div className="learning-section">
-                    <h2 className="section-title">Your Learning Journey</h2>
-                    {/* Learning categories and prompts */}
-                     {/*or Learning cards */}
-                </div>
-                <div className="history-section">
-                    <h2 className="section-title">Learning History</h2>
-                    <PromptHistory />
-                </div>
                 <div className="promopt-input-section">
                     <h2 className="section-title">Prompt Input</h2>
                     {/* User's prompt input */}
+                </div>
+                <div className="history-section">
+                    <PromptHistory />
                 </div>
             </div>
         </div>

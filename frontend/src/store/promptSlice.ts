@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { IPrompt, PromptState } from '../types';
-import { createAPrompt, getPromptWithId, getPromptsByUserId } from "./thunks/promptThunks";
+import { createAPrompt, getPromptWithId, getUserPrompts } from "./thunks/promptThunks";
 
 
 
@@ -42,13 +42,13 @@ const promptSlice = createSlice({
             .addCase(getPromptWithId.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = typeof action.payload === 'string' ? action.payload : 'Failed to fetch prompt';
-            }).addCase(getPromptsByUserId.pending, (state) => {
+            }).addCase(getUserPrompts.pending, (state) => {
                 state.status = 'loading';
-            }).addCase(getPromptsByUserId.fulfilled, (state, action: PayloadAction<IPrompt[]>) => {
+            }).addCase(getUserPrompts.fulfilled, (state, action: PayloadAction<IPrompt[]>) => {
                 state.status = 'succeeded';
                 state.currentUserPrompts = action.payload;
             })
-            .addCase(getPromptsByUserId.rejected, (state, action) => {
+            .addCase(getUserPrompts.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = typeof action.payload === 'string' ? action.payload : 'Failed to fetch user prompts';
             });

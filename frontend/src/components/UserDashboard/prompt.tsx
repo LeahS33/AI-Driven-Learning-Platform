@@ -6,28 +6,40 @@ import { getPromptWithId } from "../../store/thunks/promptThunks";
 
 const Prompt = ({ id }: { id: string }) => {
 
-    const prompt = useAppSelector(state => state.prompt.currentPrompt);
-
     const dispatch = useAppDispatch();
+    const prompt = useAppSelector(state => state.prompt.currentPrompt);
+    const status = useAppSelector(state => state.prompt.status);
 
     useEffect(() => {
-        dispatch(getPromptWithId(id));
-    }, []);
+        if (id) {
+            dispatch(getPromptWithId(id));
+        }
+    }, [dispatch, id]);
 
-    if (!prompt) {
-        return <div>Loading...</div>;
-    }
-
-    const formattedDate = prompt.created_at 
+    const formattedDate = prompt?.created_at
         ? new Date(prompt.created_at).toLocaleString()
         : 'Date not available';
-        
+
+    const isLoading = status === 'loading' || !prompt;
+
     return (
-        <div>
-            <div>{formattedDate}</div>
-            <div>category: {prompt?.category_name}</div>
-            <div>sub category: {prompt?.sub_category_name}</div>
-            <div>prompt: {prompt?.prompt}</div>
+        <div className="prompt-card">
+            {isLoading ? (
+                <div>Loading...</div>
+            ) : (
+                <>
+                    <div className="prompt-date">{formattedDate}</div>
+                    <div className="prompt-category">
+                        Category: {prompt.category_name || 'N/A'}
+                    </div>
+                    <div className="prompt-subcategory">
+                        Sub Category: {prompt.sub_category_name || 'N/A'}
+                    </div>
+                    <div className="prompt-text">
+                        Prompt: {prompt.prompt || 'N/A'}
+                    </div>
+                </>
+            )}
         </div>
     );
 }
