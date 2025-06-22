@@ -1,6 +1,6 @@
 import { useAppSelector } from '../../store/hooks';
 import type { IUser } from '../../types';
-import PromptHistory from './LearningHistory';
+import PromptHistory from '../PromptHistory';
 
 
 const UserDashboard = () => {
