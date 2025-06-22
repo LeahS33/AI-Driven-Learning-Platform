@@ -20,8 +20,7 @@ backend/
 │   ├── seeds/         # Seed scripts (e.g., admin user)
 │   ├── services/      # Business logic and DB queries
 │   ├── types.ts       # Shared TypeScript types
-│   ├── app.ts         # Express app setup
-│   └── index.ts       # App entry point
+│   └── app.ts         # Express app setup
 ├── .env               # Environment variables (not committed)
 ├── .env.example       # Example env file
 ├── package.json       # Project metadata and dependencies
