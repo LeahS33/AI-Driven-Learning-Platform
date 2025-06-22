@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { createPrompt, getPromptById, getPromptsByUserId } from '../../api/promptApi';
+import { createPrompt, getPromptById, getPromptsByUserId, getAllPrompts } from '../../api/promptApi';
 
 export const createAPrompt = createAsyncThunk(
     'prompt/createPrompt',
@@ -33,6 +33,18 @@ export const getUserPrompts = createAsyncThunk(
             return prompts;
         } catch (error: any) {
             return rejectWithValue(error.message || 'Failed to fetch prompts for user');
+        }
+    }
+);
+
+export const getAllUsersPrompts = createAsyncThunk(
+    'prompt/getAllPrompts',
+    async (_, { rejectWithValue }) => {
+        try {
+            const prompts = await getAllPrompts(); 
+            return prompts.data;
+        } catch (error: any) {
+            return rejectWithValue(error.message || 'Failed to fetch all prompts');
         }
     }
 );

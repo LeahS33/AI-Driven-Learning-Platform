@@ -1,15 +1,14 @@
 import UserManagement from './UserManagement';
+import PromptHistory from '../PromptHistory';
 
 const AdminDashboard = () => {
 
 
     return (
         <div className="admin-controls">
-        <UserManagement/>
-            {/* <h2>All Prompts</h2>
-                // Prompts list with filtering */}
-           
-       </div>
+            <UserManagement />
+            <PromptHistory isAdmin={true} />
+        </div>
     );
 };
 

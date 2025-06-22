@@ -1,29 +1,7 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import type { AdminState, IUser } from '../types';
-import { deleteUser  as deleteUserApi, giveAdminAccess as giveAdminAccessApi ,getAllUsers } from '../api/userApi';
+import { createSlice } from '@reduxjs/toolkit';
+import type { AdminState } from '../types';
+import { fetchUsers } from './thunks/adminThunks';
 
-export const fetchUsers = createAsyncThunk(
-    'admin/fetchUsers',
-    async () => {
-        const users = await getAllUsers();
-        return users;
-    }
-);
-
-export const giveAdminAccess = createAsyncThunk<IUser, string>(
-    'admin/giveAdminAccess',
-    async (userId: string) => {
-        const response = await giveAdminAccessApi(userId);
-        return response;
-    }
-);
-
-export const deleteUser = createAsyncThunk<void, string>(
-    'admin/deleteUser',
-    async (userId: string) => {
-        await deleteUserApi(userId);
-    }
-);
 
 const initialState: AdminState = {
     users: [],
@@ -47,7 +25,7 @@ const adminSlice = createSlice({
             .addCase(fetchUsers.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message || 'An error occurred';
-            });
+            })
     }
 });
 

@@ -2,6 +2,7 @@ import { BaseService } from "./generic-base-service";
 import { IPrompt, PromptModel } from "../models";
 import { generateResponse } from "../api/prompt.api"
 import { CategoryModel, SubCategoryModel } from "../models";
+import type { IPopulatedPrompt } from "../types";
 
 class PromptService extends BaseService<IPrompt> {
     async createPrompt(promptData: Partial<IPrompt>): Promise<IPrompt> {
@@ -48,23 +49,42 @@ class PromptService extends BaseService<IPrompt> {
         }
     }
 
-    async getById(id: string, populateFields?: string[]) {
+
+    async getAllPrompts(): Promise<IPrompt[]> {
         try {
-            let query = this.model.findById(id);
-            if (populateFields && populateFields.length > 0) {
-                populateFields.forEach(field => {
-                    query = query.populate(field);
-                });
+            let query = this.model.find();
+            const fieldsToPopulate = ['category_id', 'sub_category_id', 'user_id'];
+            fieldsToPopulate.forEach(field => {
+                query = query.populate(field);
+            });
+            const prompts = await query.exec();
+            if (!prompts || prompts.length === 0) {
+                return [];
             }
-            const prompt = await query;
-            if (!prompt) {
-                throw new Error('Prompt not found');
-            }
-            return prompt;
-        } catch (error: any) {
-            throw new Error(`Error fetching prompt: ${error.message}`);
+            return prompts;
+        } catch (error) {
+            console.error('Error fetching all prompts:', error);
+            throw error;
         }
     }
+
+    // async getById(id: string, populateFields?: string[]) {
+    //     try {
+    //         let query = this.model.findById(id);
+    //         if (populateFields && populateFields.length > 0) {
+    //             populateFields.forEach(field => {
+    //                 query = query.populate(field);
+    //             });
+    //         }
+    //         const prompt = await query;
+    //         if (!prompt) {
+    //             throw new Error('Prompt not found');
+    //         }
+    //         return prompt;
+    //     } catch (error: any) {
+    //         throw new Error(`Error fetching prompt: ${error.message}`);
+    //     }
+    // }
 
 }
 

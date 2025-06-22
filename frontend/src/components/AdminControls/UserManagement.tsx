@@ -2,8 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import type { IUser } from '../../types';
-import { fetchUsers } from '../../store/adminSlice';
-import { deleteUser, giveAdminAccess } from '../../store/adminSlice';
+import { fetchUsers, deleteUser, giveAdminAccess  } from '../../store/thunks/adminThunks';
 
 const UserManagement = () => {
     const dispatch = useAppDispatch();

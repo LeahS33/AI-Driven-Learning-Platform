@@ -1,14 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { IPrompt, PromptState } from '../types';
-import { createAPrompt, getPromptWithId, getUserPrompts } from "./thunks/promptThunks";
+import { createAPrompt, getUserPrompts, getAllUsersPrompts } from "./thunks/promptThunks";
 
 
 
 const initialState: PromptState = {
     allPrompts: [],
     currentUserPrompts: [],
-    currentPrompt: null,
     status: 'idle',
     error: null,
 };
@@ -32,17 +31,7 @@ const promptSlice = createSlice({
                 state.status = 'failed';
                 state.error = typeof action.payload === 'string' ? action.payload : 'Failed to create prompt';
             })
-            .addCase(getPromptWithId.pending, (state) => {
-                state.status = 'loading';
-            })
-            .addCase(getPromptWithId.fulfilled, (state, action) => {
-                state.status = 'succeeded';
-                state.currentPrompt = action.payload;
-            })
-            .addCase(getPromptWithId.rejected, (state, action) => {
-                state.status = 'failed';
-                state.error = typeof action.payload === 'string' ? action.payload : 'Failed to fetch prompt';
-            }).addCase(getUserPrompts.pending, (state) => {
+            .addCase(getUserPrompts.pending, (state) => {
                 state.status = 'loading';
             }).addCase(getUserPrompts.fulfilled, (state, action: PayloadAction<IPrompt[]>) => {
                 state.status = 'succeeded';
@@ -51,6 +40,17 @@ const promptSlice = createSlice({
             .addCase(getUserPrompts.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = typeof action.payload === 'string' ? action.payload : 'Failed to fetch user prompts';
+            })
+            .addCase(getAllUsersPrompts.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(getAllUsersPrompts.fulfilled, (state, action: PayloadAction<IPrompt[]>) => {
+                state.status = 'succeeded';
+                state.allPrompts = action.payload;
+            })
+            .addCase(getAllUsersPrompts.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = typeof action.payload === 'string' ? action.payload : 'Failed to fetch all prompts';
             });
     }
 });
