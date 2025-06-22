@@ -39,12 +39,6 @@ select:focus {
     background: #eef2ff;
 }
 
-/* select:disabled {
-    background: #f3f4f6;
-    color: #a1a1aa;
-    cursor: not-allowed;
-    opacity: 0.8;
-} */
 select:disabled {
     background: #f3f4f6;
     color: #a1a1aa;

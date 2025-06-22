@@ -14,14 +14,6 @@ class CategoryService extends BaseService<ICategory> {
         return super.create(categoryData);
     }
 
-    async getCategoryByName(name: string) {
-        const category = await this.model.findOne({ name });
-        if (!category) {
-            throw new Error('Category not found');
-        }
-        return category;
-    }
-
     async getAllCategories() {
         const categories = await this.model.find({});
         if (!categories || categories.length === 0) {
@@ -30,12 +22,5 @@ class CategoryService extends BaseService<ICategory> {
         return categories;
     }
 
-    async deleteCategoryByName(name: string) {
-        const category = await this.model.findOneAndDelete({ name });
-        if (!category) {
-            throw new Error('Category not found');
-        }
-        return category;
-    }
 }
 export const categoryService = new CategoryService(CategoryModel);

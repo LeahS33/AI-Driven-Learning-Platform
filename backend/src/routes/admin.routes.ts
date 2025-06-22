@@ -11,7 +11,5 @@ adminRouter.patch('/:userId/admin', userController.giveAdminAccess);
 adminRouter.use(isAdmin);
 adminRouter.get('/', userController.getAllUsers);
 
-// adminRouter.get('/prompts', promptController.getAllPrompts);
-// adminRouter.get('/users/:userId/history', userController.getUserHistory);
 
 export default adminRouter;

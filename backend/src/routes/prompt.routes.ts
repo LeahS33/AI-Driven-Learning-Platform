@@ -7,7 +7,6 @@ const router = Router();
 
 router.get('/user/:userId', promptController.getAllPromptByUserId);
 router.delete('/:id', promptController.deletePrompt);
-// router.get('/:id', promptController.getPromptById);
 router.get('/', promptController.getAllPrompts);
 router.post('/', promptController.createPrompt);
 
