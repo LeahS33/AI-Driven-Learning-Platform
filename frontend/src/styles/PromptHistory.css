@@ -99,6 +99,7 @@ category-tag::before {
         opacity: 0;
         transform: translateY(5px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -107,16 +108,20 @@ category-tag::before {
 
 .prompt-categories {
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
     gap: 0.75rem;
     margin-top: 0.5rem;
 }
 
 .category-tag {
-    display: inline-flex; /* Changed to inline-flex */
+    display: inline-flex;
+    /* Changed to inline-flex */
     align-items: center;
-    justify-content: center; /* Center content */
+    justify-content: center;
+    /* Center content */
     background: linear-gradient(135deg, #4f46e5 0%, #818cf8 100%);
     color: white;
     padding: 0.5rem 1rem;
@@ -128,8 +133,10 @@ category-tag::before {
     box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2);
     transition: all 0.3s ease;
     gap: 0.5rem;
-    min-width: 120px; /* Add minimum width for consistency */
+    min-width: 120px;
+    /* Add minimum width for consistency */
 }
+
 .prompt-header {
     display: flex;
     flex-direction: column;
@@ -155,6 +162,7 @@ category-tag::before {
     display: inline-block;
     letter-spacing: 0.01em;
 }
+
 .admin-filters {
     display: flex;
     justify-content: center;
@@ -173,6 +181,7 @@ category-tag::before {
     font-weight: 500;
     outline: none;
     transition: border 0.2s;
+    width: fit-content;
 }
 
 .admin-filters select:focus {

@@ -25,7 +25,7 @@ const PromptHistory = ({ isAdmin = false }) => {
     }, [dispatch, user, isAdmin]);
 
     const prompts = isAdmin ? allPrompts : userPrompts;
-    const filteredPrompts = selectedUser 
+    const filteredPrompts = selectedUser
         ? allPrompts.filter(prompt => prompt.user_id === selectedUser)
         : prompts;
 
@@ -38,15 +38,15 @@ const PromptHistory = ({ isAdmin = false }) => {
             <h2 className="history-title">
                 {isAdmin ? 'All Learning History' : 'Learning History'}
             </h2>
-            
+
             {isAdmin && (
                 <div className="admin-filters">
-                    <select 
-                        value={selectedUser || ''} 
+                    <select
+                        value={selectedUser || ''}
                         onChange={(e) => setSelectedUser(e.target.value || null)}
                     >
                         <option value="">All Users</option>
-                       {allUsers.map((u) => (
+                        {allUsers.map((u) => (
                             <option key={u._id} value={u._id}>
                                 {u.name}
                             </option>
@@ -60,7 +60,7 @@ const PromptHistory = ({ isAdmin = false }) => {
                     {filteredPrompts
                         .slice()
                         .reverse()
-                        .map((prompt:IPrompt) => (
+                        .map((prompt: IPrompt) => (
                             <div key={prompt._id} className="prompt-card">
                                 {isAdmin && (
                                     <div className="prompt-user-info">
@@ -69,15 +69,19 @@ const PromptHistory = ({ isAdmin = false }) => {
                                 )}
                                 <div className="prompt-header">
                                     <span className="prompt-date">
-                                        {new Date(prompt.created_at).toLocaleDateString()}
+                                        {new Date(prompt.created_at).toLocaleDateString('en-GB', {
+                                            day: '2-digit',
+                                            month: '2-digit',
+                                            year: 'numeric'
+                                        })} - {new Date(prompt.created_at).toLocaleTimeString('en-GB', {
+                                            hour: '2-digit',
+                                            minute: '2-digit',
+                                            hour12: false
+                                        })}
                                     </span>
                                     <div className="prompt-categories">
-                                        <span className="category-tag">
-                                            {prompt.category_name}
-                                        </span>
-                                        <span className="category-tag sub">
-                                            {prompt.sub_category_name}
-                                        </span>
+                                        <span className="category-tag">{prompt.category_name}</span>
+                                        <span className="category-tag sub">{prompt.sub_category_name}</span>
                                     </div>
                                 </div>
                                 <div className="prompt-content">

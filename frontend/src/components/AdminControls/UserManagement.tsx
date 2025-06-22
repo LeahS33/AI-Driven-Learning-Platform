@@ -46,7 +46,7 @@ const UserManagement = () => {
             </div>
             <h2 className="section-title">Users</h2>
             <div className="users-grid">
-                {status === 'loading' && <div className="loading">Loading...</div>}
+                {status === 'loading' && <div className="loading">Loading Users...</div>}
                 {error && <div className="error">{error}</div>}
                 {users.map(user => (
                     <div key={user._id} className="user-card">

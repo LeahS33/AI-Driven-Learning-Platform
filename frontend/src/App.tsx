@@ -7,10 +7,6 @@ import Profile from './pages/Profile.tsx'
 import { Provider } from 'react-redux';
 import store from './store/store';
 import Dashboard from './pages/Dashbord.tsx';
-// import AdminDashboard from './pages/AdminDashboard.tsx';
-
-
-//import './App.css'
 
 function App() {
 
@@ -24,7 +20,6 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<h1>404 Not Found</h1>} />
             <Route path="/dashboard" element={<Dashboard />} />
-            {/* <Route path="/admin/*" element={<AdminRoute> <AdminDashboard /> </AdminRoute>}/> */}
           </Routes>
         </BrowserRouter>
       </Provider>
